@@ -1,0 +1,52 @@
+=== TASK 1: LOGIN ===
+Command:POST http://localhost:3000/auth/login
+{
+    "email":"sumitdiwakar476@gmail.com",
+    "password":"password123"
+}
+
+Response:-POST /auth/login
+[OTP] Session c1v80o generated: 891608
+
+{
+    "message": "OTP sent",
+    "loginSessionId": "c1v80o"
+}
+
+=== TASK 2: VERIFY OTP ===
+
+Command:POST http://localhost:3000/auth/verify-otp
+{
+  "loginSessionId": "c1v80o",
+  "otp": "891608"
+}
+
+Response:-
+{
+    "message": "OTP verified"
+}
+
+POST /auth/verify-otp
+POST /auth/verify-otp -> 200 (5ms)
+
+=== TASK 3: GET JWT TOKEN ===
+Command:POST http://localhost:3000/auth/token
+
+Response:-
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN1bWl0ZGl3YWthcjQ3NkBnbWFpbC5jb20iLCJpYXQiOjE3NzA4Mjg3NTcsImV4cCI6MTc3MDgyOTY1N30.8GutbGkyZPxySwl4V_qUFDt6SzrAdPFV_69sVUGqSKw"
+}
+
+=== TASK 4: PROTECTED ROUTE ===
+Command:GET http://localhost:3000/protected
+Authorization :Bearer token Paste
+Response:-
+{
+    "message": "Access granted",
+    "user": {
+        "email": "sumitdiwakar476@gmail.com",
+        "iat": 1770828757,
+        "exp": 1770829657
+    },
+    "success_flag": "FLAG-c3VtaXRkaXdha2FyNDc2QGdtYWlsLmNvbV9DT01QTEVURURfQVNTSUdOTUVOVA=="
+}
